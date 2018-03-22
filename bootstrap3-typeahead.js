@@ -1,6 +1,6 @@
 /* =============================================================
  * bootstrap3-typeahead.js v4.0.2
- * https://github.com/bassjobsen/Bootstrap-3-Typeahead
+ * https://github.com/mcNux/Bootstrap-3-Typeahead
  * =============================================================
  * Original written by @mdo and @fat
  * =============================================================
@@ -411,6 +411,24 @@
       this.$element.val(this.displayText(newVal) || newVal);
     },
 
+    highlightNext: function (event) {
+      var active = this.$menu.find('.active').removeClass('active');
+      var next = active.next();
+      if (!next.length) {
+        next = $(this.$menu.find('li')[0]);
+      }
+      next.addClass('active');
+    },
+
+    highlightPrev: function (event) {
+      var active = this.$menu.find('.active').removeClass('active');
+      var prev = active.prev();
+      if (!prev.length) {
+        prev = this.$menu.find('li').last();
+      }
+      prev.addClass('active');
+    },
+
     listen: function () {
       this.$element
         .on('focus.bootstrap3Typeahead',    $.proxy(this.focus, this))
@@ -478,14 +496,22 @@
           // with the shiftKey (this is actually the left parenthesis)
           if (e.shiftKey) return;
           e.preventDefault();
-          this.prev();
+          if (!this.options.arrowKeySelect) {
+            this.highlightPrev();
+          } else {
+            this.prev();
+          }
           break;
 
         case 40: // down arrow
           // with the shiftKey (this is actually the right parenthesis)
           if (e.shiftKey) return;
           e.preventDefault();
-          this.next();
+          if (!this.options.arrowKeySelect) {
+            this.highlightNext();
+          } else {
+            this.next();
+          }
           break;
       }
     },
@@ -683,7 +709,8 @@
         headerHtml: '<h6 class="dropdown-header"></h6>',
         headerDivider: '<div class="dropdown-divider"></div>'
       } 
-    }
+    },
+    arrowKeySelect: true
   };
 
   $.fn.typeahead.Constructor = Typeahead;

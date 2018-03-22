@@ -138,6 +138,7 @@ If you are using jQuery in your application, note that camel case attributes suc
 |appendTo|jQuery element|`null`|By defaut, the menu is added right after the input element. Use this option to add the menu to another div. It should not be used if you want to use bootstrap dropup or dropdown-menu-right classes.|
 |fitToElement|boolean|`false`|Set to true if you want the menu to be the same size than the input it is attached to.|
 |addItem|JSON object|`false`|Adds an item to the end of the list, for example "New Entry". This could be used, for example, to pop a dialog when an item is not found in the list of data. Example: http://cl.ly/image/2u170I1q1G3A/addItem.png|
+|arrowKeySelect|boolean|`true`|Allows you to dictate whether or not using up/down arrow keys highlights (false) or selects (true) the option.|
 
 ## Methods
 
